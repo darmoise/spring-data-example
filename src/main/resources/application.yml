@@ -1,0 +1,23 @@
+spring:
+    datasource:
+        url: 'jdbc:postgresql://localhost:5432/postgres'
+        username: 'user'
+        password: 'password'
+
+    flyway:
+        enabled: true
+
+    jpa:
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: none
+
+springdoc:
+    show-actuator: true
+
+server:
+    port: 9001
+
+service:
+    rest-api: '/api'
