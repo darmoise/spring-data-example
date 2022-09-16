@@ -12,6 +12,9 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class UserDto {
     private final UUID id;
+    private final long version;
+    private final LocalDate createdAt;
+    private final LocalDate updateAt;
     private final String firstName;
     private final String lastName;
     private final String username;

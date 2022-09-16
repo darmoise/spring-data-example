@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,7 +22,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "users")
 public class UserEntity {
     @Id
@@ -50,7 +48,7 @@ public class UserEntity {
     @Version
     private Long version;
 
-    @UpdateTimestamp
+    @UpdateTimestamp // it just doesn't work, see https://habr.com/ru/post/238487?
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
