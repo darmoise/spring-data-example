@@ -2,14 +2,18 @@ package com.github.darmoise.springdataexample.service;
 
 import com.github.darmoise.springdataexample.domain.model.User;
 import com.github.darmoise.springdataexample.repository.UserRepository;
+import com.github.darmoise.springdataexample.util.DateMapper;
 import com.github.darmoise.springdataexample.util.UserMapper;
 import com.google.common.collect.Streams;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -25,6 +29,16 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    public void changeBirthDate(
+        final UUID userId,
+        final LocalDate birthDate
+    ) {
+        userRepository.changeBirthDate(
+            userId,
+            DateMapper.mapLocalDateToInstant(birthDate)
+        );
+    }
+
     public User getUser(UUID userId) {
         return userRepository.findById(userId)
             .map(userMapper::entityToModel)
@@ -36,4 +50,9 @@ public class UserService {
             .map(userMapper::entityToModel)
             .toList();
     }
+
+    public void deleteAll() {
+        userRepository.deleteAll();;
+    }
+
 }

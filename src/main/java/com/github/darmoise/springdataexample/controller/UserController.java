@@ -47,6 +47,11 @@ public class UserController {
         return userMapper.modelToDto(user);
     }
 
+    @DeleteMapping
+    public void deleteAll() {
+        userService.deleteAll();
+    }
+
     @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
