@@ -2,10 +2,9 @@ package com.github.darmoise.springdataexample.util;
 
 import com.github.darmoise.springdataexample.domain.entity.UserEntity;
 import com.github.darmoise.springdataexample.domain.model.User;
+import com.github.darmoise.springdataexample.dto.AddUserRequestDto;
 import com.github.darmoise.springdataexample.dto.UserDto;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import com.github.darmoise.springdataexample.util.helper.DateHelperMapper;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.mapstruct.AfterMapping;
@@ -13,31 +12,50 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+@Mapper(
+    componentModel = "spring",
+    uses = {
+        DateHelperMapper.class
+    }
+)
 public abstract class UserMapper {
-    public abstract User dtoToModel(UserDto dto);
+    public abstract User dtoToModel(AddUserRequestDto dto);
 
     @Mapping(
+        source = "birthDate",
         target = "birthDate",
-        expression = "java( mapLocalDateToInstant(source) )"
+        qualifiedByName = "mapLocalDateToInstant"
+    )
+    @Mapping(
+        source = "createdAt",
+        target = "createdAt",
+        qualifiedByName = "mapLocalDateToInstant"
+    )
+    @Mapping(
+        source = "updatedAt",
+        target = "updatedAt",
+        qualifiedByName = "mapLocalDateToInstant"
     )
     public abstract UserEntity modelToEntity(User source);
 
     @Mapping(
+        source = "birthDate",
         target = "birthDate",
-        expression = "java( mapInstantToLocalDate(source) )"
+        qualifiedByName = "mapInstantToLocalDate"
+    )
+    @Mapping(
+        source = "createdAt",
+        target = "createdAt",
+        qualifiedByName = "mapInstantToLocalDate"
+    )
+    @Mapping(
+        source = "updatedAt",
+        target = "updatedAt",
+        qualifiedByName = "mapInstantToLocalDate"
     )
     public abstract User entityToModel(UserEntity source);
 
     public abstract UserDto modelToDto(User source);
-
-    protected Instant mapLocalDateToInstant(final User user) {
-        return user.getBirthDate().atStartOfDay(ZoneId.systemDefault()).toInstant();
-    }
-
-    protected LocalDate mapInstantToLocalDate(final UserEntity user) {
-        return LocalDate.ofInstant(user.getBirthDate(), ZoneId.systemDefault());
-    }
 
     @AfterMapping
     protected void after(@MappingTarget final UserEntity entity) {
