@@ -4,15 +4,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -59,4 +52,16 @@ public class UserEntity {
         orphanRemoval = true
     )
     private List<HobbyEntity> hobbies = new ArrayList<>();
+
+    @OneToOne(
+        mappedBy="user",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        orphanRemoval = true
+    )
+    private AnthropometryEntity anthropometry;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<DeviceEntity> devices;
 }

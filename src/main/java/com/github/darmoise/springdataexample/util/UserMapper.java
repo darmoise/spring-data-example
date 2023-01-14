@@ -2,8 +2,8 @@ package com.github.darmoise.springdataexample.util;
 
 import com.github.darmoise.springdataexample.domain.entity.UserEntity;
 import com.github.darmoise.springdataexample.domain.model.User;
-import com.github.darmoise.springdataexample.dto.AddUserRequestDto;
-import com.github.darmoise.springdataexample.dto.UserDto;
+import com.github.darmoise.springdataexample.dto.request.AddUserRequestDto;
+import com.github.darmoise.springdataexample.dto.response.UserResponseDto;
 import com.github.darmoise.springdataexample.util.helper.DateHelperMapper;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -55,14 +55,16 @@ public abstract class UserMapper {
     )
     public abstract User entityToModel(UserEntity source);
 
-    public abstract UserDto modelToDto(User source);
+    public abstract UserResponseDto modelToDto(User source);
 
     @AfterMapping
     protected void after(@MappingTarget final UserEntity entity) {
         Optional.ofNullable(entity.getHobbies()).ifPresentOrElse(
-            hobbies -> hobbies.forEach(item -> {
-                item.setUser(entity);
-            }),
+            hobbies -> hobbies.forEach(item -> item.setUser(entity)),
+            () -> entity.setHobbies(new ArrayList<>())
+        );
+        Optional.ofNullable(entity.getAnthropometry()).ifPresentOrElse(
+            item -> item.setUser(entity),
             () -> entity.setHobbies(new ArrayList<>())
         );
     }

@@ -1,10 +1,11 @@
-CREATE TABLE devices (
+CREATE TABLE anthropometries (
     id         UUID NOT NULL DEFAULT uuid_generate_v4(),
-    name       VARCHAR(255) NOT NULL,
-    start_date TIMESTAMP NOT NULL,
+    height     INT NOT NULL,
+    weight     INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT current_timestamp,
     updated_at TIMESTAMP NOT NULL,
     user_id    UUID NOT NULL,
 
-    CONSTRAINT pk_devices_id PRIMARY KEY (id)
+    CONSTRAINT pk_anthropometries_id PRIMARY KEY (id)
 );
+

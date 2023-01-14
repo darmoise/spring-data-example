@@ -1,8 +1,10 @@
-package com.github.darmoise.springdataexample.dto;
+package com.github.darmoise.springdataexample.dto.response;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import com.github.darmoise.springdataexample.domain.model.Anthropometry;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -10,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class UserDto {
+public class UserResponseDto {
     private final UUID id;
     private final long version;
     private final LocalDate createdAt;
@@ -19,5 +21,7 @@ public class UserDto {
     private final String lastName;
     private final String username;
     private final LocalDate birthDate;
-    private final List<HobbyDto> hobbies;
+    private final Anthropometry anthropometry;
+    private final List<HobbyResponseDto> hobbies;
+    private final List<DeviceResponseDto> devices;
 }

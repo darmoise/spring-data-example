@@ -5,22 +5,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class User {
+public class Device {
     private final UUID id;
-    private final long version;
+    private final String name;
+    private final LocalDate startDate;
     private final LocalDate createdAt;
     private final LocalDate updatedAt;
-    private final String firstName;
-    private final String lastName;
-    private final String username;
-    private final LocalDate birthDate;
-    private final Anthropometry anthropometry;
-    private final List<Hobby> hobbies;
-    private final List<Device> devices;
 }
