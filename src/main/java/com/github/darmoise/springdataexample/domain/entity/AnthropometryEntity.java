@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "anthropometries")
+@Table(name = "anthropometry")
 @Getter
 @Setter
 @ToString
@@ -41,6 +41,6 @@ public class AnthropometryEntity {
         fetch = FetchType.EAGER,
         optional = false
     )
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "person_id")
+    private PersonEntity user;
 }

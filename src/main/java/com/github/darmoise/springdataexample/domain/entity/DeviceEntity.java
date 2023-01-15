@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "devices")
+@Table(name = "device")
 @Getter
 @Setter
 @ToString

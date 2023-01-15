@@ -18,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "hobbies")
+@Table(name = "hobby")
 @Getter
 @Setter
 @ToString
@@ -50,9 +50,9 @@ public class HobbyEntity {
         optional = false
     )
     @JoinColumn(
-        name = "user_id",
+        name = "person_id",
         nullable = false
     )
     @ToString.Exclude
-    private UserEntity user;
+    private PersonEntity user;
 }

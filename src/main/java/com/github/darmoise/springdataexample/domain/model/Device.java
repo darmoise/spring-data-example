@@ -11,7 +11,6 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 public class Device {
-    private final UUID id;
     private final String name;
     private final LocalDate startDate;
     private final LocalDate createdAt;

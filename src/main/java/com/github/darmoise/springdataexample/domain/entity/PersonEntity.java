@@ -15,8 +15,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "person")
+public class PersonEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -27,23 +27,18 @@ public class UserEntity {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
+
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
     @Column(name = "username", nullable = false)
     private String username;
+
     @Column(name = "birth_date", nullable = false)
     private Instant birthDate;
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
     @Version
     private Long version;
-
-    @UpdateTimestamp // it just doesn't work, see https://habr.com/ru/post/238487?
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @OneToMany(
         mappedBy = "user",
@@ -54,14 +49,20 @@ public class UserEntity {
     private List<HobbyEntity> hobbies = new ArrayList<>();
 
     @OneToOne(
-        mappedBy="user",
+        mappedBy = "user",
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         orphanRemoval = true
     )
     private AnthropometryEntity anthropometry;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<DeviceEntity> devices;
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        orphanRemoval = true
+    )
+    @JoinColumn(
+        name = "person_id"
+    )
+    private List<DeviceEntity> devices = new ArrayList<>();
 }
