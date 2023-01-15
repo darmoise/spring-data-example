@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class Hobby {
+    private final UUID id;
     private final String name;
     private final LocalDate createdAt;
     private final LocalDate updatedAt;

@@ -12,6 +12,7 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 public class User {
+    private final UUID id;
     private final long version;
     private final String firstName;
     private final String lastName;

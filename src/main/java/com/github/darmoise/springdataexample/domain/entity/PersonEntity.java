@@ -58,11 +58,12 @@ public class PersonEntity {
 
     @OneToMany(
         cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY,
+        fetch = FetchType.EAGER,
         orphanRemoval = true
     )
     @JoinColumn(
-        name = "person_id"
+        name = "person_id",
+        nullable = false
     )
     private List<DeviceEntity> devices = new ArrayList<>();
 }
