@@ -8,7 +8,8 @@ CREATE TABLE person (
     birth_date TIMESTAMP NOT NULL,
     version    INT NOT NULL,
 
-    CONSTRAINT pk_person_id PRIMARY KEY (id)
+    CONSTRAINT pk_person_id PRIMARY KEY (id),
+    CONSTRAINT uk_username UNIQUE (username)
 );
 
 CREATE TABLE hobby (
@@ -19,5 +20,6 @@ CREATE TABLE hobby (
     updated_at TIMESTAMP NOT NULL,
     person_id  UUID NOT NULL,
 
-    CONSTRAINT pk_hobby_id PRIMARY KEY (id)
+    CONSTRAINT pk_hobby_id PRIMARY KEY (id),
+    CONSTRAINT fk_hobby_person_id FOREIGN KEY (person_id) REFERENCES person (id)
 );

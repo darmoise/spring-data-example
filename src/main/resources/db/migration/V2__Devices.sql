@@ -6,5 +6,6 @@ CREATE TABLE device (
     updated_at TIMESTAMP NOT NULL,
     person_id  UUID NOT NULL,
 
-    CONSTRAINT pk_device_id PRIMARY KEY (id)
+    CONSTRAINT pk_device_id PRIMARY KEY (id),
+    CONSTRAINT fk_device_person_id FOREIGN KEY (person_id) REFERENCES person (id)
 );
