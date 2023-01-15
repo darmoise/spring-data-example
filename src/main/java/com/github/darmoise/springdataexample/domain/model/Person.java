@@ -1,4 +1,4 @@
-package com.github.darmoise.springdataexample.dto.request;
+package com.github.darmoise.springdataexample.domain.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,16 +6,19 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class AddUserRequestDto {
+public class Person {
+    private final UUID id;
+    private final long version;
     private final String firstName;
     private final String lastName;
     private final String username;
     private final LocalDate birthDate;
-    private final AnthropometryRequestDto anthropometry;
-    private final List<HobbyRequestDto> hobbies;
-    private final List<DeviceRequestDto> devices;
+    private final Anthropometry anthropometry;
+    private final List<Hobby> hobbies;
+    private final List<Device> devices;
 }

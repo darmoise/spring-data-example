@@ -1,6 +1,6 @@
 package com.github.darmoise.springdataexample.service;
 
-import com.github.darmoise.springdataexample.domain.model.User;
+import com.github.darmoise.springdataexample.domain.model.Person;
 import com.github.darmoise.springdataexample.repository.UserRepository;
 import com.github.darmoise.springdataexample.util.DateMapper;
 import com.github.darmoise.springdataexample.util.UserMapper;
@@ -20,7 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public User addUser(User user) {
+    public Person addUser(Person user) {
         val entity = userMapper.modelToEntity(user);
         return userMapper.entityToModel(userRepository.save(entity));
     }
@@ -39,13 +39,13 @@ public class UserService {
         );
     }
 
-    public User getUser(UUID userId) {
+    public Person getUser(UUID userId) {
         return userRepository.findById(userId)
             .map(userMapper::entityToModel)
             .orElseThrow();
     }
 
-    public List<User> getUsers() {
+    public List<Person> getUsers() {
         return Streams.stream(userRepository.findAll())
             .map(userMapper::entityToModel)
             .toList();

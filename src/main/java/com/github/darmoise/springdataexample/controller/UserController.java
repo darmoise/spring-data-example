@@ -1,7 +1,7 @@
 package com.github.darmoise.springdataexample.controller;
 
-import com.github.darmoise.springdataexample.dto.request.AddUserRequestDto;
-import com.github.darmoise.springdataexample.dto.response.UserResponseDto;
+import com.github.darmoise.springdataexample.dto.request.AddPersonRequestDto;
+import com.github.darmoise.springdataexample.dto.response.PersonResponseDto;
 import com.github.darmoise.springdataexample.service.UserService;
 import com.github.darmoise.springdataexample.util.UserMapper;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public List<UserResponseDto> getUsers() {
+    public List<PersonResponseDto> getUsers() {
         return userService.getUsers()
             .stream()
             .map(userMapper::modelToDto)
@@ -34,14 +34,14 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserResponseDto getUser(@PathVariable UUID userId) {
+    public PersonResponseDto getUser(@PathVariable UUID userId) {
         return userMapper.modelToDto(
             userService.getUser(userId)
         );
     }
 
     @PostMapping
-    public UserResponseDto addUser(@RequestBody AddUserRequestDto dto) {
+    public PersonResponseDto addUser(@RequestBody AddPersonRequestDto dto) {
         val user = userService.addUser(userMapper.dtoToModel(dto));
 
         return userMapper.modelToDto(user);

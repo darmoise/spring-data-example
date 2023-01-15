@@ -1,9 +1,9 @@
 package com.github.darmoise.springdataexample.util;
 
 import com.github.darmoise.springdataexample.domain.entity.PersonEntity;
-import com.github.darmoise.springdataexample.domain.model.User;
-import com.github.darmoise.springdataexample.dto.request.AddUserRequestDto;
-import com.github.darmoise.springdataexample.dto.response.UserResponseDto;
+import com.github.darmoise.springdataexample.domain.model.Person;
+import com.github.darmoise.springdataexample.dto.request.AddPersonRequestDto;
+import com.github.darmoise.springdataexample.dto.response.PersonResponseDto;
 import com.github.darmoise.springdataexample.util.helper.DateHelperMapper;
 
 import java.util.ArrayList;
@@ -20,23 +20,23 @@ import org.mapstruct.*;
     }
 )
 public abstract class UserMapper {
-    public abstract User dtoToModel(AddUserRequestDto dto);
+    public abstract Person dtoToModel(AddPersonRequestDto dto);
 
     @Mapping(
         source = "birthDate",
         target = "birthDate",
         qualifiedByName = "mapLocalDateToInstant"
     )
-    public abstract PersonEntity modelToEntity(User source);
+    public abstract PersonEntity modelToEntity(Person source);
 
     @Mapping(
         source = "birthDate",
         target = "birthDate",
         qualifiedByName = "mapInstantToLocalDate"
     )
-    public abstract User entityToModel(PersonEntity source);
+    public abstract Person entityToModel(PersonEntity source);
 
-    public abstract UserResponseDto modelToDto(User source);
+    public abstract PersonResponseDto modelToDto(Person source);
 
     @AfterMapping
     protected void after(@MappingTarget final PersonEntity entity) {

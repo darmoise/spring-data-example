@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class AnthropometryRequestDto {
+public class AddAnthropometryRequestDto {
     private final int height;
     private final int weight;
 }
