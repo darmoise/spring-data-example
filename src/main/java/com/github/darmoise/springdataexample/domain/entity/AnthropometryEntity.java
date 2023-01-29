@@ -26,7 +26,11 @@ public class AnthropometryEntity {
         strategy = "org.hibernate.id.UUIDGenerator"
     )
     private UUID id;
+
+    @Column
     private int height;
+
+    @Column
     private int weight;
 
     @CreationTimestamp
